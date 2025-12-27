@@ -141,6 +141,7 @@
                     </div>
 
                     <button
+                        wire:click="checkout"
                         class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 mb-3">
                         Proceed to Checkout
                     </button>

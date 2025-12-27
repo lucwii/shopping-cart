@@ -20,3 +20,21 @@ models:
     timestamps: timestamps
     relationships:
       belongsTo: Cart, Product
+
+  Order:
+    user_id: id foreign:users
+    total_amount: "decimal(10,2)"
+    status: string default:pending
+    timestamps: timestamps
+    relationships:
+      belongsTo: User
+      hasMany: OrderItem
+
+  OrderItem:
+    order_id: id foreign:orders
+    product_id: id foreign:products
+    quantity: integer
+    price: "decimal(8,2)"
+    timestamps: timestamps
+    relationships:
+      belongsTo: Order, Product
