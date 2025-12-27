@@ -1,0 +1,22 @@
+models:
+  Product:
+    name: string
+    price: "decimal(8,2)"
+    stock_quantity: integer
+    image: string nullable
+    timestamps: timestamps
+
+  Cart:
+    user_id: id foreign:users
+    timestamps: timestamps
+    relationships:
+      belongsTo: User
+      hasMany: CartItem
+
+  CartItem:
+    cart_id: id foreign:carts
+    product_id: id foreign:products
+    quantity: integer default:1
+    timestamps: timestamps
+    relationships:
+      belongsTo: Cart, Product
