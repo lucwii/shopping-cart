@@ -16,6 +16,9 @@ Route::view('dashboard', 'dashboard')
     ->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('shop', \App\Livewire\Products::class)->name('shop');
+    Route::get('shop/{id}', \App\Livewire\ProductShow::class)->name('shop.show');
+    Route::get('cart', \App\Livewire\Cart::class)->name('cart');
     Route::redirect('settings', 'settings/profile');
 
     Route::get('settings/profile', Profile::class)->name('profile.edit');
