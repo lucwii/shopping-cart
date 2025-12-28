@@ -29,20 +29,16 @@ class SendDailySalesReport extends Command
      */
     public function handle()
     {
-        // Uzmi sve porudžbine od danas
         $orders = Order::with(['user', 'items'])
             ->whereDate('created_at', Carbon::today())
             ->get();
 
-        // Izračunaj ukupan prihod
         $totalRevenue = $orders->sum('total_amount');
 
-        // Izračunaj ukupan broj prodatih proizvoda
         $totalItemsSold = $orders->sum(function ($order) {
             return $order->items->sum('quantity');
         });
 
-        // Pošalji email admin-u
         Mail::to('admin@example.com')
             ->send(new DailySalesReport($orders, $totalRevenue, $totalItemsSold));
 
